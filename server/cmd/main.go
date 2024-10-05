@@ -1,15 +1,17 @@
 package main
 
 import (
-	"FlashKill/server/dao"
-	"FlashKill/server/model"
 	"log"
+	"server/rpc"
+	"server/rpc/kitex_gen/FlashKill/flashkill"
 )
 
 func main() {
-	dao.InitMySQL()
-	err := dao.DB.AutoMigrate(&model.Sellers{}, &model.Buyers{}, &model.Orders{}, &model.Items{}, &model.Activities{})
+	svr := flashkill.NewServer(new(rpc.FlashKillImpl))
+
+	err := svr.Run()
+
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 	}
 }

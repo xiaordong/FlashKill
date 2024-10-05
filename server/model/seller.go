@@ -1,12 +1,18 @@
 package model
 
 import (
-	"FlashKill/server/dao"
 	"log"
+	"server/dao"
+	"server/selfUtils"
 	"time"
 )
 
 func (s *Sellers) New() error {
+	temp, err := selfUtils.Crypto(s.Password)
+	if err != nil {
+		log.Fatal(err)
+	}
+	s.Password = temp
 	if err := dao.DB.Create(&s).Error; err != nil {
 		return err
 	} else {

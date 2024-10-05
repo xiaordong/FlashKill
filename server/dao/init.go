@@ -14,7 +14,12 @@ var (
 	RDB *redis.Client
 )
 
-func InitMySQL() {
+func init() {
+	initRedis()
+	initMySQL()
+
+}
+func initMySQL() {
 	user := "root"
 	password := "2132047479"
 	port := "3306"
@@ -31,7 +36,7 @@ func InitMySQL() {
 	}
 	DB = db.Debug()
 }
-func InitRedis() {
+func initRedis() {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     "127.0.0.1:6379",
 		DB:       0,
