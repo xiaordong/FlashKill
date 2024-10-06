@@ -1,8 +1,6 @@
 module server
 
-go 1.22
-
-replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
+go 1.22.7
 
 require (
 	github.com/cloudwego/gopkg v0.1.2
@@ -14,7 +12,6 @@ require (
 )
 
 require (
-	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/apache/thrift v0.13.0 // indirect
 	github.com/bytedance/gopkg v0.1.1 // indirect
 	github.com/bytedance/sonic v1.12.2 // indirect
@@ -31,9 +28,8 @@ require (
 	github.com/cloudwego/thriftgo v0.3.17 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
-	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/go-sql-driver/mysql v1.8.1 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
+	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20240827171923-fa2c70bbbfe5 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
@@ -56,8 +52,8 @@ require (
 	golang.org/x/arch v0.2.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
-	golang.org/x/text v0.18.0 // indirect
+	golang.org/x/sys v0.24.0 // indirect
+	golang.org/x/text v0.17.0 // indirect
 	google.golang.org/genproto v0.0.0-20210513213006-bf773b8c8384 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
