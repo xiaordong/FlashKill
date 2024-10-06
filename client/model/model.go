@@ -1,9 +1,12 @@
 package model
 
 import (
+	"github.com/go-redis/redis"
 	"github.com/shopspring/decimal"
 	"time"
 )
+
+var RDB *redis.Client
 
 type Sellers struct {
 	ID       uint       `json:"id" gorm:"primarykey"`

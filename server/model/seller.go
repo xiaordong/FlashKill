@@ -3,27 +3,13 @@ package model
 import (
 	"log"
 	"server/dao"
-	"server/selfUtils"
 	"time"
 )
-
-func (s *Sellers) New() error {
-	temp, err := selfUtils.Crypto(s.Password)
-	if err != nil {
-		log.Fatal(err)
-	}
-	s.Password = temp
-	if err := dao.DB.Create(&s).Error; err != nil {
-		return err
-	} else {
-		return nil
-	}
-}
 
 // NewActivity 商家创建活动,需要选择商品和持续时间
 func (s *Sellers) NewActivity(item Items, lastTime time.Time) (Activities, error) {
 	a := Activities{
-		PosterID: s.ID,
+		SellerId: s.ID,
 		Item:     item,
 		LastTime: lastTime,
 	}

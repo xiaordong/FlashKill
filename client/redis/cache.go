@@ -1,11 +1,10 @@
 package redis
 
 import (
+	"client/model"
 	"github.com/go-redis/redis"
 	"log"
 )
-
-var RDB *redis.Client
 
 func InitRedis() {
 	db := redis.NewClient(&redis.Options{
@@ -15,5 +14,5 @@ func InitRedis() {
 	if err := db.Ping().Err(); err != nil {
 		log.Fatal(err)
 	}
-	RDB = db
+	model.RDB = db
 }

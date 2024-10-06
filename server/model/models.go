@@ -15,6 +15,7 @@ type Sellers struct {
 
 type Items struct {
 	ItemID uint64          `gorm:"primarykey"`
+	Name   string          `json:"name" gorm:"size:255;unique;not null"`
 	Price  decimal.Decimal `json:"price" gorm:"type:decimal(10,2)"`
 }
 
@@ -27,7 +28,7 @@ type Buyers struct {
 
 type Activities struct {
 	ActivityID uint      `gorm:"primarykey"`
-	PosterID   uint      `json:"poster_id"`
+	SellerId   uint      `gorm:"foreignkey:SellerID"`
 	Left       uint      `json:"left"`
 	LastTime   time.Time `json:"last_time"`
 	Item       Items     `gorm:"foreignkey:ItemID"`
