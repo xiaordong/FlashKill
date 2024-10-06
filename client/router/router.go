@@ -7,9 +7,13 @@ import (
 )
 
 func InitRouter() {
-	h := server.Default()
-	h.Group("/Ping", func(c context.Context, ctx *app.RequestContext) {
+	h := server.Default(server.WithHostPorts(":8080"))
+	h.GET("/Ping", func(c context.Context, ctx *app.RequestContext) {
 		ctx.JSON(200, "Pong")
 	})
+	h.Group("/buyer")
+	{
+		h.POST("/register")
+	}
 	h.Spin()
 }

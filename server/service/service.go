@@ -2,20 +2,31 @@ package service
 
 import (
 	"log"
+	"server/dao"
 	"server/model"
+	flashkill "server/rpc/kitex_gen/FlashKill"
+	"server/selfUtils"
 )
 
-func Register(s model.Sellers, b model.Buyers) error {
-	if b.Name != "" {
-		err := b.New()
+func Register(s *flashkill.Seller, b *flashkill.Buyer) error {
+	if b.Username != "" {
+		temp, err := selfUtils.Crypto(b.Password)
+		b.Password = temp
 		if err != nil {
 			log.Fatal(err)
 			return err
 		}
+		if err = dao.DB.Model(&model.Buyers{}).Create(&b).Error; err != nil {
+			return err
+		}
 	} else if s.Name != "" {
-		err := s.New()
+		temp, err := selfUtils.Crypto(s.Password)
+		s.Password = temp
 		if err != nil {
 			log.Fatal(err)
+			return err
+		}
+		if err = dao.DB.Model(&model.Sellers{}).Create(&s).Error; err != nil {
 			return err
 		}
 	}
