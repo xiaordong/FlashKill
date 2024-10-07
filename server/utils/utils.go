@@ -1,4 +1,4 @@
-package selfUtils
+package utils
 
 import (
 	"bytes"

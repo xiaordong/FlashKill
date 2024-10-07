@@ -10,8 +10,8 @@ import (
 )
 
 type Buyer struct {
-	UcdserID *int64 `thrift:"UcdserID,1,optional" frugal:"1,optional,i64" json:"UcdserID,omitempty"`
-	Username string `thrift:"Username,2" frugal:"2,default,string" json:"Username"`
+	BuyerID  *int64 `thrift:"BuyerID,1,optional" frugal:"1,optional,i64" json:"BuyerID,omitempty"`
+	Name     string `thrift:"Name,2" frugal:"2,default,string" json:"Name"`
 	Password string `thrift:"Password,3" frugal:"3,default,string" json:"Password"`
 	Token    string `thrift:"Token,4" frugal:"4,default,string" json:"Token"`
 }
@@ -23,17 +23,17 @@ func NewBuyer() *Buyer {
 func (p *Buyer) InitDefault() {
 }
 
-var Buyer_UcdserID_DEFAULT int64
+var Buyer_BuyerID_DEFAULT int64
 
-func (p *Buyer) GetUcdserID() (v int64) {
-	if !p.IsSetUcdserID() {
-		return Buyer_UcdserID_DEFAULT
+func (p *Buyer) GetBuyerID() (v int64) {
+	if !p.IsSetBuyerID() {
+		return Buyer_BuyerID_DEFAULT
 	}
-	return *p.UcdserID
+	return *p.BuyerID
 }
 
-func (p *Buyer) GetUsername() (v string) {
-	return p.Username
+func (p *Buyer) GetName() (v string) {
+	return p.Name
 }
 
 func (p *Buyer) GetPassword() (v string) {
@@ -43,11 +43,11 @@ func (p *Buyer) GetPassword() (v string) {
 func (p *Buyer) GetToken() (v string) {
 	return p.Token
 }
-func (p *Buyer) SetUcdserID(val *int64) {
-	p.UcdserID = val
+func (p *Buyer) SetBuyerID(val *int64) {
+	p.BuyerID = val
 }
-func (p *Buyer) SetUsername(val string) {
-	p.Username = val
+func (p *Buyer) SetName(val string) {
+	p.Name = val
 }
 func (p *Buyer) SetPassword(val string) {
 	p.Password = val
@@ -57,14 +57,14 @@ func (p *Buyer) SetToken(val string) {
 }
 
 var fieldIDToName_Buyer = map[int16]string{
-	1: "UcdserID",
-	2: "Username",
+	1: "BuyerID",
+	2: "Name",
 	3: "Password",
 	4: "Token",
 }
 
-func (p *Buyer) IsSetUcdserID() bool {
-	return p.UcdserID != nil
+func (p *Buyer) IsSetBuyerID() bool {
+	return p.BuyerID != nil
 }
 
 func (p *Buyer) Read(iprot thrift.TProtocol) (err error) {
@@ -155,7 +155,7 @@ func (p *Buyer) ReadField1(iprot thrift.TProtocol) error {
 	} else {
 		_field = &v
 	}
-	p.UcdserID = _field
+	p.BuyerID = _field
 	return nil
 }
 func (p *Buyer) ReadField2(iprot thrift.TProtocol) error {
@@ -166,7 +166,7 @@ func (p *Buyer) ReadField2(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.Username = _field
+	p.Name = _field
 	return nil
 }
 func (p *Buyer) ReadField3(iprot thrift.TProtocol) error {
@@ -233,11 +233,11 @@ WriteStructEndError:
 }
 
 func (p *Buyer) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetUcdserID() {
-		if err = oprot.WriteFieldBegin("UcdserID", thrift.I64, 1); err != nil {
+	if p.IsSetBuyerID() {
+		if err = oprot.WriteFieldBegin("BuyerID", thrift.I64, 1); err != nil {
 			goto WriteFieldBeginError
 		}
-		if err := oprot.WriteI64(*p.UcdserID); err != nil {
+		if err := oprot.WriteI64(*p.BuyerID); err != nil {
 			return err
 		}
 		if err = oprot.WriteFieldEnd(); err != nil {
@@ -252,10 +252,10 @@ WriteFieldEndError:
 }
 
 func (p *Buyer) writeField2(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("Username", thrift.STRING, 2); err != nil {
+	if err = oprot.WriteFieldBegin("Name", thrift.STRING, 2); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Username); err != nil {
+	if err := oprot.WriteString(p.Name); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -316,10 +316,10 @@ func (p *Buyer) DeepEqual(ano *Buyer) bool {
 	} else if p == nil || ano == nil {
 		return false
 	}
-	if !p.Field1DeepEqual(ano.UcdserID) {
+	if !p.Field1DeepEqual(ano.BuyerID) {
 		return false
 	}
-	if !p.Field2DeepEqual(ano.Username) {
+	if !p.Field2DeepEqual(ano.Name) {
 		return false
 	}
 	if !p.Field3DeepEqual(ano.Password) {
@@ -333,19 +333,19 @@ func (p *Buyer) DeepEqual(ano *Buyer) bool {
 
 func (p *Buyer) Field1DeepEqual(src *int64) bool {
 
-	if p.UcdserID == src {
+	if p.BuyerID == src {
 		return true
-	} else if p.UcdserID == nil || src == nil {
+	} else if p.BuyerID == nil || src == nil {
 		return false
 	}
-	if *p.UcdserID != *src {
+	if *p.BuyerID != *src {
 		return false
 	}
 	return true
 }
 func (p *Buyer) Field2DeepEqual(src string) bool {
 
-	if strings.Compare(p.Username, src) != 0 {
+	if strings.Compare(p.Name, src) != 0 {
 		return false
 	}
 	return true

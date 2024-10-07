@@ -1,8 +1,8 @@
 namespace go FlashKill
 
 struct Buyer{
-    1:optional i64 UcdserID;
-    2:string Username;
+    1:optional i64 BuyerID;
+    2:string Name;
     3:string Password;
     4:string Token;
 }

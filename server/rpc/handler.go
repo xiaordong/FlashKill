@@ -23,6 +23,5 @@ func (s *FlashKillImpl) Login(ctx context.Context, b *flashkill.Buyer, seller *f
 
 // GenToken implements the FlashKillImpl interface.
 func (s *FlashKillImpl) GenToken(ctx context.Context, b *flashkill.Buyer, seller *flashkill.Seller) (resp string, err error) {
-
-	return
+	return service.GenToken(seller, b)
 }

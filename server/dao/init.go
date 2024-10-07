@@ -35,6 +35,7 @@ func initMySQL() {
 		os.Exit(5)
 	}
 	DB = db.Debug()
+
 }
 func initRedis() {
 	rdb := redis.NewClient(&redis.Options{

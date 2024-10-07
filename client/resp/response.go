@@ -1,5 +1,7 @@
 package resp
 
+import "github.com/cloudwego/hertz/pkg/app"
+
 type Resp struct {
 	code int
 	info string
@@ -31,14 +33,7 @@ func NewResponse(opt ...Option) *Resp {
 	}
 	return resp
 }
-func NewErrorResponse(opt ...Option) *Resp {
-	resp := &Resp{
-		code: 500,
-		msg:  "err",
-		data: nil,
-	}
-	for _, op := range opt {
-		op(resp)
-	}
-	return resp
+func Response(ctx *app.RequestContext, opt ...Option) {
+	resp := NewResponse(opt...)
+	ctx.JSON(resp.code, resp)
 }

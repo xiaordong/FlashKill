@@ -9,7 +9,7 @@ import (
 // NewActivity 商家创建活动,需要选择商品和持续时间
 func (s *Sellers) NewActivity(item Items, lastTime time.Time) (Activities, error) {
 	a := Activities{
-		SellerId: s.ID,
+		SellerID: s.SellerID,
 		Item:     item,
 		LastTime: lastTime,
 	}
@@ -24,7 +24,7 @@ func (s *Sellers) NewActivity(item Items, lastTime time.Time) (Activities, error
 // GetOrders 商家获取订单
 func (s *Sellers) GetOrders() ([]Orders, error) {
 	var orders []Orders
-	if err := dao.DB.Preload("Buyers").Preload("Items").Where("seller_id = ?", s.ID).Find(&orders).Error; err != nil {
+	if err := dao.DB.Preload("Buyers").Preload("Items").Where("seller_id = ?", s.SellerID).Find(&orders).Error; err != nil {
 		return orders, err
 	}
 	return orders, nil

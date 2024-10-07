@@ -120,7 +120,7 @@ func (p *Buyer) FastReadField1(buf []byte) (int, error) {
 		offset += l
 		_field = &v
 	}
-	p.UcdserID = _field
+	p.BuyerID = _field
 	return offset, nil
 }
 
@@ -134,7 +134,7 @@ func (p *Buyer) FastReadField2(buf []byte) (int, error) {
 		offset += l
 		_field = v
 	}
-	p.Username = _field
+	p.Name = _field
 	return offset, nil
 }
 
@@ -197,9 +197,9 @@ func (p *Buyer) BLength() int {
 
 func (p *Buyer) fastWriteField1(buf []byte, w thrift.NocopyWriter) int {
 	offset := 0
-	if p.IsSetUcdserID() {
+	if p.IsSetBuyerID() {
 		offset += thrift.Binary.WriteFieldBegin(buf[offset:], thrift.I64, 1)
-		offset += thrift.Binary.WriteI64(buf[offset:], *p.UcdserID)
+		offset += thrift.Binary.WriteI64(buf[offset:], *p.BuyerID)
 	}
 	return offset
 }
@@ -207,7 +207,7 @@ func (p *Buyer) fastWriteField1(buf []byte, w thrift.NocopyWriter) int {
 func (p *Buyer) fastWriteField2(buf []byte, w thrift.NocopyWriter) int {
 	offset := 0
 	offset += thrift.Binary.WriteFieldBegin(buf[offset:], thrift.STRING, 2)
-	offset += thrift.Binary.WriteStringNocopy(buf[offset:], w, p.Username)
+	offset += thrift.Binary.WriteStringNocopy(buf[offset:], w, p.Name)
 	return offset
 }
 
@@ -227,7 +227,7 @@ func (p *Buyer) fastWriteField4(buf []byte, w thrift.NocopyWriter) int {
 
 func (p *Buyer) field1Length() int {
 	l := 0
-	if p.IsSetUcdserID() {
+	if p.IsSetBuyerID() {
 		l += thrift.Binary.FieldBeginLength()
 		l += thrift.Binary.I64Length()
 	}
@@ -237,7 +237,7 @@ func (p *Buyer) field1Length() int {
 func (p *Buyer) field2Length() int {
 	l := 0
 	l += thrift.Binary.FieldBeginLength()
-	l += thrift.Binary.StringLengthNocopy(p.Username)
+	l += thrift.Binary.StringLengthNocopy(p.Name)
 	return l
 }
 
