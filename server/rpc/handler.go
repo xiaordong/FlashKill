@@ -17,11 +17,11 @@ func (s *FlashKillImpl) Register(ctx context.Context, b *flashkill.Buyer, seller
 
 // Login implements the FlashKillImpl interface.
 func (s *FlashKillImpl) Login(ctx context.Context, b *flashkill.Buyer, seller *flashkill.Seller) (err error) {
-	// TODO: Your code here...
-	return
+
+	return service.Login(seller, b)
 }
 
 // GenToken implements the FlashKillImpl interface.
 func (s *FlashKillImpl) GenToken(ctx context.Context, b *flashkill.Buyer, seller *flashkill.Seller) (resp string, err error) {
-	return service.GenToken(seller, b)
+	return service.SetToken(seller, b)
 }

@@ -1,11 +1,11 @@
 package service
 
 import (
+	"errors"
 	"log"
 	"server/dao"
 
 	"github.com/dgrijalva/jwt-go"
-	"server/model"
 	flashkill "server/rpc/kitex_gen/FlashKill"
 	"server/utils"
 	"time"
@@ -39,11 +39,6 @@ func Register(s *flashkill.Seller, b *flashkill.Buyer) (err error) {
 	}
 	return nil
 }
-func Login(s model.Sellers, b model.Buyers) {
-	if b.Name != "" {
-	} else if s.Name != "" {
-	}
-}
 func SetToken(s *flashkill.Seller, b *flashkill.Buyer) (str string, err error) {
 	var cnt string = time.Now().Format("2006-01-02 15:04:05")
 	key := []byte(cnt)
@@ -75,6 +70,28 @@ func WriteToken(b *flashkill.Buyer, s *flashkill.Seller, str string) (err error)
 			return res.Error
 		}
 		dao.RDB.Set("SellerToken", s.Token, 0)
+	}
+	return nil
+}
+func Login(s *flashkill.Seller, b *flashkill.Buyer) (err error) {
+	if b.Name != "" {
+		var token string
+		token, err = dao.RDB.Get("BuyerToken").Result()
+		if err != nil {
+			return err
+		}
+		if token != b.Token {
+			return errors.New("buyer token error")
+		}
+	} else if b.Name != "" {
+		var token string
+		token, err = dao.RDB.Get("SellerToken").Result()
+		if err != nil {
+			return err
+		}
+		if token != s.Token {
+			return errors.New("seller token error")
+		}
 	}
 	return nil
 }

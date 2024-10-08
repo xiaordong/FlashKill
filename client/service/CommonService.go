@@ -64,6 +64,14 @@ func SellerLogin(s model.Sellers) (model.Sellers, error) {
 	}
 	return model.Sellers{}, nil
 }
-func BuyerLogin(b model.Buyers) (model.Buyers, error) {
-
+func BuyerLogin(b model.Buyers) (err error) {
+	err = rpc.FlashKill.Login(context.Background(), &flashkill.Buyer{
+		Token: b.Token,
+	}, &flashkill.Seller{
+		Name: "",
+	})
+	if err != nil {
+		log.Fatalln("Buyer login error :", err)
+	}
+	return nil
 }

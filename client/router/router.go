@@ -12,8 +12,14 @@ func InitRouter() {
 	h.GET("/Ping", func(c context.Context, ctx *app.RequestContext) {
 		ctx.JSON(200, "Pong")
 	})
-
-	h.POST("/register", api.Register)
+	b := h.Group("/buyer")
+	{
+		b.POST("/register", api.BuyerRegister)
+	}
+	s := h.Group("/seller")
+	{
+		s.POST("/register", api.SellerRegister)
+	}
 
 	h.Spin()
 }

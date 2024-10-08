@@ -14,13 +14,13 @@ func BuyerRegister(c context.Context, ctx *app.RequestContext) {
 	u.Name = ctx.PostForm("name")
 	u.Password = ctx.PostForm("password")
 	if err = ctx.BindJSON(&u); err != nil {
-		resp.Response(ctx, resp.WithCode(401), resp.WithInfo("error"), resp.WithMsg(err.Error()))
+		resp.Response(ctx, resp.WithCode(401), resp.WithMsg(err.Error()))
 		return
 	}
 	var token string
 	token, err = service.BuyerRegister(u)
 	if err != nil {
-		resp.Response(ctx, resp.WithCode(402), resp.WithInfo(err.Error()))
+		resp.Response(ctx, resp.WithCode(402), resp.WithMsg(err.Error()))
 		return
 	}
 	ctx.Header("BuyerToken", token)
@@ -32,15 +32,28 @@ func SellerRegister(c context.Context, ctx *app.RequestContext) {
 	s.Name = ctx.PostForm("name")
 	s.Password = ctx.PostForm("password")
 	if err = ctx.BindJSON(&s); err != nil {
-		resp.Response(ctx, resp.WithCode(401), resp.WithInfo("error"), resp.WithMsg(err.Error()))
+		resp.Response(ctx, resp.WithCode(401), resp.WithMsg("error:"+err.Error()))
 		return
 	}
 	var token string
 	token, err = service.SellerRegister(s)
 	if err != nil {
-		resp.Response(ctx, resp.WithCode(402), resp.WithInfo(err.Error()))
+		resp.Response(ctx, resp.WithCode(402), resp.WithMsg("error:"+err.Error()))
 		return
 	}
 	ctx.Header("SellerToken", token)
 	resp.Response(ctx, resp.WithData(token))
+}
+func BuyerLogin(c context.Context, ctx *app.RequestContext) {
+	var b model.Buyers
+	b.Token = string(ctx.GetHeader("BuyerToken"))
+	if err := ctx.BindJSON(&b); err != nil {
+		resp.Response(ctx, resp.WithCode(401), resp.WithMsg("error:"+err.Error()))
+		return
+	}
+	if err := service.BuyerLogin(b); err != nil {
+		resp.Response(ctx, resp.WithCode(402), resp.WithMsg(err.Error()))
+		return
+	}
+	resp.Response(ctx)
 }
