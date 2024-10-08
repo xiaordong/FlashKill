@@ -19,6 +19,9 @@ func Register(s *flashkill.Seller, b *flashkill.Buyer) (err error) {
 			log.Fatal(err)
 			return err
 		}
+		if res := dao.DB.Where("name = ?", b.Name).Find(&b); res.Error != nil || res.RowsAffected != 0 {
+			return errors.New("exist buyer error")
+		}
 		if err = dao.DB.Create(&b).Error; err != nil {
 			return err
 		}
@@ -30,6 +33,9 @@ func Register(s *flashkill.Seller, b *flashkill.Buyer) (err error) {
 		if passwordErr != nil {
 			log.Fatal(err)
 			return err
+		}
+		if res := dao.DB.Where("name = ?", s.Name).Find(&s); res.Error != nil || res.RowsAffected != 0 {
+			return errors.New("exist seller error")
 		}
 		if err = dao.DB.Create(&s).Error; err != nil {
 			return err
