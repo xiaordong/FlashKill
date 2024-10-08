@@ -15,10 +15,12 @@ func InitRouter() {
 	b := h.Group("/buyer")
 	{
 		b.POST("/register", api.BuyerRegister)
+		b.GET("/login", api.BuyerLogin)
 	}
 	s := h.Group("/seller")
 	{
 		s.POST("/register", api.SellerRegister)
+		s.GET("/login", api.BuyerLogin)
 	}
 
 	h.Spin()

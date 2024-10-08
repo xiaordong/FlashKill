@@ -17,7 +17,7 @@ func BuyerRegister(b model.Buyers) (aToken string, err error) {
 		Name: "",
 	})
 	if err != nil {
-		log.Fatalln("register rpc Buyer error:", err)
+		return "", err
 	}
 	aToken, err = rpc.FlashKill.GenToken(context.Background(), &flashkill.Buyer{
 		Username: b.Name,
@@ -38,7 +38,7 @@ func SellerRegister(s model.Sellers) (aToken string, err error) {
 		Password: s.Password,
 	})
 	if err != nil {
-		log.Fatalln("register rpc Seller error:", err)
+		return "", err
 	}
 	aToken, err = rpc.FlashKill.GenToken(context.Background(), &flashkill.Buyer{
 		Username: "",

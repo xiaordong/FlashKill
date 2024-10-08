@@ -2,10 +2,9 @@ package service
 
 import (
 	"errors"
+	"github.com/dgrijalva/jwt-go"
 	"log"
 	"server/dao"
-
-	"github.com/dgrijalva/jwt-go"
 	flashkill "server/rpc/kitex_gen/FlashKill"
 	"server/utils"
 	"time"
@@ -70,7 +69,7 @@ func WriteToken(b *flashkill.Buyer, s *flashkill.Seller, str string) (err error)
 			return res.Error
 		}
 		dao.RDB.Set("BuyerToken", b.Token, 0)
-	} else if b.Name != "" {
+	} else if s.Name != "" {
 		res := dao.DB.Model(&s).Where("name = ?", s.Name).Update("token", str)
 		if res.Error != nil {
 			return res.Error

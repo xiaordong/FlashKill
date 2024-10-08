@@ -9,6 +9,7 @@ type Sellers struct {
 	SellerID uint       `json:"id" gorm:"primaryKey"`
 	Name     string     `json:"name" gorm:"size:255;unique;not null"`
 	Password string     `json:"password" gorm:"size:255;not null"`
+	Token    string     `json:"token" gorm:"size:255;not null"`
 	Activity Activities `gorm:"foreignkey:ActivityID"`
 	Item     Items      `gorm:"foreignkey:ItemID"`
 }
