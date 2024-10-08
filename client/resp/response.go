@@ -1,32 +1,30 @@
 package resp
 
-import "github.com/cloudwego/hertz/pkg/app"
+import (
+	"github.com/cloudwego/hertz/pkg/app"
+)
 
 type Resp struct {
-	code int
-	info string
-	msg  string
-	data interface{}
+	Code int    `json:"Code"`
+	Msg  string `json:"Msg"`
+	Data any    `json:"Data"`
 }
 type Option func(*Resp)
 
 func WithMsg(msg string) Option {
-	return func(r *Resp) { r.msg = msg }
+	return func(r *Resp) { r.Msg = msg }
 }
 func WithCode(code int) Option {
-	return func(r *Resp) { r.code = code }
+	return func(r *Resp) { r.Code = code }
 }
-func WithInfo(info string) Option {
-	return func(r *Resp) { r.info = info }
-}
-func WithData(data interface{}) Option {
-	return func(r *Resp) { r.data = data }
+func WithData(data any) Option {
+	return func(r *Resp) { r.Data = data }
 }
 func NewResponse(opt ...Option) *Resp {
 	resp := &Resp{
-		code: 200,
-		msg:  "success",
-		data: nil,
+		Code: 200,
+		Msg:  "success",
+		Data: nil,
 	}
 	for _, op := range opt {
 		op(resp)
@@ -35,5 +33,5 @@ func NewResponse(opt ...Option) *Resp {
 }
 func Response(ctx *app.RequestContext, opt ...Option) {
 	resp := NewResponse(opt...)
-	ctx.JSON(resp.code, resp)
+	ctx.JSON(resp.Code, resp)
 }
