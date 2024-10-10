@@ -3,7 +3,6 @@ package model
 import (
 	"github.com/go-redis/redis"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 var RDB *redis.Client
@@ -30,13 +29,13 @@ type Activities struct {
 	GoodsName  string          `gorm:"type:varchar(20);not null"`
 	Price      decimal.Decimal `json:"price" gorm:"type:decimal(10,2)"`
 	Left       uint            `json:"left"`
-	LastTime   time.Time       `json:"last_time"`
+	TimeOut    int             `json:"time_out"`
 }
 
 type Orders struct {
-	OrderID  uint      `gorm:"primaryKey"`
-	BuyerID  uint      `json:"buyer_id"`
-	SellerID uint      `json:"seller_id"`
-	Status   bool      `json:"status"`
-	LastTime time.Time `json:"last_time"`
+	OrderID  uint `gorm:"primaryKey"`
+	BuyerID  uint `json:"buyer_id"`
+	SellerID uint `json:"seller_id"`
+	Status   bool `json:"status"`
+	TimeOut  int  `json:"time_out"`
 }

@@ -2,7 +2,6 @@ package model
 
 import (
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 type Sellers struct {
@@ -27,7 +26,7 @@ type Activities struct {
 	GoodsName  string          `gorm:"type:varchar(255);not null"`
 	Price      decimal.Decimal `gorm:"type:decimal(20,8);not null"`
 	Left       uint            `json:"left"`
-	LastTime   time.Time       `json:"last_time"`
+	TimeOut    int             `json:"time_out"`
 }
 
 type Orders struct {
@@ -37,5 +36,5 @@ type Orders struct {
 	GoodsName  string          `json:"goodes_name"`
 	GoodsPrice decimal.Decimal `json:"goods_price"`
 	Status     bool            `json:"status"`
-	LastTime   time.Time       `json:"last_time"`
+	TimeOut    int             `json:"time_out"`
 }
