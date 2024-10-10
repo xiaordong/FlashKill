@@ -24,12 +24,10 @@ type Buyers struct {
 }
 
 type Activities struct {
-	ActivityID uint            `gorm:"primaryKey"`
-	SellerID   uint            `gorm:"foreignkey:SellerID"`
-	GoodsName  string          `gorm:"type:varchar(20);not null"`
-	Price      decimal.Decimal `json:"price" gorm:"type:decimal(10,2)"`
-	Left       uint            `json:"left"`
-	TimeOut    int             `json:"time_out"`
+	GoodsName string          `json:"goods_name"`
+	Price     decimal.Decimal `json:"price" `
+	Left      uint            `json:"left"`
+	TimeOut   int             `json:"time_out"`
 }
 
 type Orders struct {
