@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -21,16 +22,20 @@ type Buyers struct {
 }
 
 type Activities struct {
-	ActivityID uint      `gorm:"primaryKey"`
-	SellerID   uint      `gorm:"foreignkey:SellerID"`
-	Left       uint      `json:"left"`
-	LastTime   time.Time `json:"last_time"`
+	ActivityID uint            `gorm:"primaryKey"`
+	SellerID   uint            `gorm:"foreignkey:SellerID"`
+	GoodsName  string          `gorm:"type:varchar(255);not null"`
+	Price      decimal.Decimal `gorm:"type:decimal(20,8);not null"`
+	Left       uint            `json:"left"`
+	LastTime   time.Time       `json:"last_time"`
 }
 
 type Orders struct {
-	OrderID  uint      `gorm:"primaryKey"`
-	BuyerID  uint      `json:"buyer_id"`
-	SellerID uint      `json:"seller_id"`
-	Status   bool      `json:"status"`
-	LastTime time.Time `json:"last_time"`
+	OrderID    uint            `gorm:"primaryKey"`
+	BuyerID    uint            `json:"buyer_id"`
+	SellerID   uint            `json:"seller_id"`
+	GoodsName  string          `json:"goodes_name"`
+	GoodsPrice decimal.Decimal `json:"goods_price"`
+	Status     bool            `json:"status"`
+	LastTime   time.Time       `json:"last_time"`
 }
