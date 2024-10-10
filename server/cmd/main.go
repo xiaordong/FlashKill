@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	dao.DB.AutoMigrate(&model.Sellers{}, &model.Buyers{}, &model.Activities{}, &model.Orders{})
+	dao.DB.AutoMigrate(&model.Sellers{}, &model.Buyers{})
 	svr := flashkill.NewServer(new(rpc.FlashKillImpl))
 	err := svr.Run()
 	if err != nil {
