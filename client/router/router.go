@@ -2,6 +2,7 @@ package router
 
 import (
 	"client/api"
+	"client/service"
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
@@ -21,6 +22,7 @@ func InitRouter() {
 	{
 		s.POST("/register", api.SellerRegister)
 		s.GET("/login", api.BuyerLogin)
+		s.POST("/new", service.Create) //创建活动
 	}
 
 	h.Spin()

@@ -47,6 +47,10 @@ func SellerRegister(c context.Context, ctx *app.RequestContext) {
 func BuyerLogin(c context.Context, ctx *app.RequestContext) {
 	var b model.Buyers
 	b.Token = string(ctx.GetHeader("BuyerToken"))
+	if b.Token == "" {
+		resp.Response(ctx, resp.WithCode(403), resp.WithMsg("error"), resp.WithData("valid BuyerToken"))
+		return
+	}
 	if err := ctx.BindJSON(&b); err != nil {
 		resp.Response(ctx, resp.WithCode(401), resp.WithMsg("error:"+err.Error()))
 		return
