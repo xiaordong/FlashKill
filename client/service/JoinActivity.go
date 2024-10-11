@@ -34,8 +34,14 @@ func JoinActivity(c context.Context, ctx *app.RequestContext) {
 			log.Fatalln("get the Seller Left error:", err)
 		}
 		s.Activity.Left, _ = strconv.Atoi(left)
+		if s.Activity.Left > 0 {
+			s.Activity.Left--
+		} else {
+			log.Println("seller left is 0")
+			resp.Response(ctx, resp.WithMsg("seller left is 0"))
+		}
 		model.RDB.Set(s.Token+"Left", s.Activity.Left, 0)
-		model.RDB.Set(s.Token+"Order", true, 30*time.Second)
+		model.RDB.Set(b.Token+"Order", true, 30*time.Second)
 		res, err := model.RDB.Get(key).Result()
 		if err == nil && res == value {
 			model.RDB.Del("lock")
@@ -43,8 +49,10 @@ func JoinActivity(c context.Context, ctx *app.RequestContext) {
 			log.Fatalln("Del lock error:", err)
 		}
 	} else {
-		log.Fatalln("get lock error")
+		log.Println("get lock error")
+		resp.Response(ctx, resp.WithCode(403), resp.WithMsg("too much request"))
 	}
+
 	resp.Response(ctx, resp.WithData("ordered successfully"))
 }
 func DealOrder(c context.Context, ctx *app.RequestContext) {

@@ -69,11 +69,11 @@ func SellerLogin(c context.Context, ctx *app.RequestContext) {
 		resp.Response(ctx, resp.WithCode(403), resp.WithMsg("error"), resp.WithData("valid SellerToken"))
 		return
 	}
-	if err := ctx.BindJSON(&s); err != nil {
+	if err = ctx.BindJSON(&s); err != nil {
 		resp.Response(ctx, resp.WithCode(401), resp.WithMsg("error:"+err.Error()))
 		return
 	}
-	if s, err = service.SellerLogin(s); err != nil {
+	if _, err = service.SellerLogin(s); err != nil {
 		resp.Response(ctx, resp.WithCode(402), resp.WithMsg(err.Error()))
 		return
 	}
