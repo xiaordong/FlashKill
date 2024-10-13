@@ -10,7 +10,7 @@ import (
 
 // TokenBucket 令牌桶算法
 type TokenBucket struct {
-	capacity int64 //最大容量，及分发的最大令牌数（==实际商品数）
+	capacity int64 //最大容量，及分发的最大令牌数
 	rate     int64 //每秒分发的速度
 	tokens   int64
 	mutex    sync.Mutex
